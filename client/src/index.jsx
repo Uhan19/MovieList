@@ -13,14 +13,17 @@ var movies = [
 class MovieList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      movies: movies 
+    }
   }
 
   render() {
     return (
       <div>
         <ul>
-          {this.props.movie.map((movie) => 
-            <Movie movie={movie} />
+          {this.state.movies.map((movie, i) => 
+            <Movie key = {i} movie={movie} />
           )} 
         </ul>
       </div>
@@ -28,4 +31,4 @@ class MovieList extends React.Component {
   }
 }
 
-ReactDOM.render( <MovieList movie={movies}/>, document.getElementById('app'));
+ReactDOM.render( <MovieList movies={movies}/>, document.getElementById('app'));
