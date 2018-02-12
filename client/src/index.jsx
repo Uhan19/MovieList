@@ -9,37 +9,36 @@ var movies = [
   {title: 'The Grey'},
   {title: 'Sunshine'},
   {title: 'Ex Machina'},
-];
+]
 
 class MovieList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: movies 
+      movies: this.props.movies,
+      searchResults: this.props.movies
     };
     this.handleSearch = this.handleSearch.bind(this);
-  };
+  }
   handleSearch(e) {
     // if e is equal to movie 
-    if (e.key === 'Enter') {
-       this.state.movies.map(movie => {
-         if (e.target.value === movie.title) {
-          this.setState({
-            movies: [movie]
-          })
-        } 
-      })
-    }
-  };
+    var filteredArr = this.state.movies.filter(movie => {
+      var target = e.target.value.toLowerCase();
+      var title = movie.title.toLowerCase(); 
+      return title.startsWith(target);
+    });
+    console.log(filteredArr)
+    this.setState({
+      searchResults: filteredArr
+    })
+  }
   render() {
     return (
       <div>
-        <div>
-          <input type="text" onKeyUp={this.handleSearch} placeholder='Tell me what you want'/>
-        </div>
+        <input type="text" onChange={this.handleSearch} placeholder='Tell me what you want'/>
         <ul>
-          {this.state.movies.map((movie, i) => 
-            <Movie key = {i} movie={movie} />
+          {this.state.searchResults.map((movie, i) => 
+            <Movie key={i} movie={movie} />
           )} 
         </ul>
       </div>
