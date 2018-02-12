@@ -5,11 +5,11 @@ import { AddMovie } from './components/AddMovie.jsx';
 import { Search } from './components/Search.jsx';
 
 var movies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
+  {title: 'Mean Girls', description: 'Most quoted movie of all time!'},
+  {title: 'Hackers', description: 'A Hack Reactor documentary'},
+  {title: 'The Grey', description: 'Liam Neeson fights a wolf'},
+  {title: 'Sunshine', description: 'Something SF is missing'},
+  {title: 'Ex Machina', description: 'Would rewatch this video in a heartbeat'},
 ]
 
 class MovieList extends React.Component {
@@ -17,10 +17,12 @@ class MovieList extends React.Component {
     super(props);
     this.state = {
       movies: movies,
-      searchResults: movies
+      searchResults: movies,
+      showDescription: false
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDescription = this.handleDescription.bind(this);
   }
 
   handleSearch(e) {
@@ -47,6 +49,13 @@ class MovieList extends React.Component {
     }
   }
 
+  handleDescription(e) {
+    const description = this.state.showDescription;
+    this.setState({
+      showDescription: !description
+    })
+  }
+
   render() {
     return (
       <div>
@@ -54,7 +63,7 @@ class MovieList extends React.Component {
         <Search search={this.handleSearch} />
         <ul>
           {this.state.searchResults.map((movie, i) => 
-            <Movie key={i} movie={movie} />
+            <Movie click={this.handleDescription} state={this.state.showDescription} key={i} movie={movie} />
           )} 
         </ul>
       </div>
