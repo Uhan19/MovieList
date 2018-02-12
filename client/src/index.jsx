@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
 import { Movie } from './components/Movie.jsx';
-// import { Search } from './componenets/Search.jsx';
+import { AddMovie } from './components/AddMovie.jsx';
+import { Search } from './components/Search.jsx';
 
 var movies = [
   {title: 'Mean Girls'},
@@ -15,11 +16,13 @@ class MovieList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: this.props.movies,
-      searchResults: this.props.movies
+      movies: movies,
+      searchResults: movies
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSearch(e) {
     // if e is equal to movie 
     var filteredArr = this.state.movies.filter(movie => {
@@ -32,10 +35,23 @@ class MovieList extends React.Component {
       searchResults: filteredArr
     })
   }
+
+  handleSubmit(e) {
+    if(e.key === 'Enter') {
+      console.log({title: e.target.value})
+      const newMoviesList = this.state.movies
+      newMoviesList.push({title: e.target.value})
+      this.setState({
+        movies: newMoviesList 
+      });
+    }
+  }
+
   render() {
     return (
       <div>
-        <input type="text" onChange={this.handleSearch} placeholder='Tell me what you want'/>
+        <AddMovie add={this.handleSubmit} />
+        <Search search={this.handleSearch} />
         <ul>
           {this.state.searchResults.map((movie, i) => 
             <Movie key={i} movie={movie} />
