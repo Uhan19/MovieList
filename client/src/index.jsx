@@ -18,11 +18,9 @@ class MovieList extends React.Component {
     this.state = {
       movies: movies,
       searchResults: movies,
-      showDescription: false
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
   }
 
   handleSearch(e) {
@@ -49,13 +47,6 @@ class MovieList extends React.Component {
     }
   }
 
-  handleDescription(e) {
-    const description = this.state.showDescription;
-    this.setState({
-      showDescription: !description
-    })
-  }
-
   render() {
     return (
       <div>
@@ -63,7 +54,7 @@ class MovieList extends React.Component {
         <Search search={this.handleSearch} />
         <ul>
           {this.state.searchResults.map((movie, i) => 
-            <Movie click={this.handleDescription} state={this.state.showDescription} key={i} movie={movie} />
+            <Movie key={i} movie={movie} />
           )} 
         </ul>
       </div>
