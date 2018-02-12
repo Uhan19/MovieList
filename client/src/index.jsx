@@ -3,13 +3,14 @@ import ReactDOM  from 'react-dom';
 import { Movie } from './components/Movie.jsx';
 import { AddMovie } from './components/AddMovie.jsx';
 import { Search } from './components/Search.jsx';
+import ToggleButton from 'react-toggle-button';
 
 var movies = [
   {title: 'Mean Girls', description: 'Most quoted movie of all time!'},
   {title: 'Hackers', description: 'A Hack Reactor documentary'},
   {title: 'The Grey', description: 'Liam Neeson fights a wolf'},
   {title: 'Sunshine', description: 'Something SF is missing'},
-  {title: 'Ex Machina', description: 'Would rewatch this video in a heartbeat'},
+  {title: 'Ex Machina', description: 'Would rewatch this movie in a heartbeat'},
 ]
 
 class MovieList extends React.Component {
@@ -54,7 +55,7 @@ class MovieList extends React.Component {
         <Search search={this.handleSearch} />
         <ul>
           {this.state.searchResults.map((movie, i) => 
-            <Movie key={i} movie={movie} />
+            <Movie key={i} movie={movie} /> 
           )} 
         </ul>
       </div>
