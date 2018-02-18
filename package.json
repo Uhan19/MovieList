@@ -23,6 +23,8 @@
     "react-checkbox-group": "^3.3.4",
     "react-dom": "^16.1.0",
     "react-toggle-button": "^2.2.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "webpack": "^3.8.1"
   }
 }

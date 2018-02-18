@@ -6,17 +6,6 @@ import { AddMovie } from "./components/AddMovie.jsx";
 import { Search } from "./components/Search.jsx";
 import ToggleButton from "react-toggle-button";
 
-var movies = [
-  { title: "Mean Girls", description: "Most quoted movie of all time!" },
-  { title: "Hackers", description: "A Hack Reactor documentary" },
-  { title: "The Grey", description: "Liam Neeson fights a wolf" },
-  { title: "Sunshine", description: "Something SF is missing" },
-  {
-    title: "Ex Machina",
-    description: "Would rewatch this movie in a heartbeat"
-  }
-];
-
 class MovieList extends React.Component {
   constructor(props) {
     super(props);
@@ -30,9 +19,8 @@ class MovieList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/movies")
+      .get('/load') // this will load all movies in the DB
       .then(res => {
-        console.log(res.data)
         this.setState({
           movies: res.data
         })
@@ -42,14 +30,25 @@ class MovieList extends React.Component {
       });
   }
 
-  handleSearch(e) {
+  handleSearch(e) { // currently, this is being set to onchange, might need to change it to onkeyup to deal
+                    // with the asyncronocity of the get request to DB.
     // if e is equal to movie
+    axios
+    .get('movies', {title: e.target.value}) // this will query the DB for the movie's title that the user types
+    .then(res => {
+      this.setState({
+        movies: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    // below is the solution for the hard data
     var filteredArr = this.state.movies.filter(movie => {
       var target = e.target.value.toLowerCase();
       var title = movie.title.toLowerCase();
       return title.startsWith(target);
     });
-    console.log(filteredArr);
     this.setState({
       searchResults: filteredArr
     });
@@ -58,11 +57,19 @@ class MovieList extends React.Component {
   handleSubmit(e) {
     if (e.key === "Enter") {
       console.log({ title: e.target.value });
-      const newMoviesList = this.state.movies;
-      newMoviesList.push({ title: e.target.value });
-      this.setState({
-        movies: newMoviesList
-      });
+      axios
+      .post('/movies', {title: e.target.value})
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      // const newMoviesList = this.state.movies;
+      // newMoviesList.push({ title: e.target.value });
+      // this.setState({
+      //   movies: newMoviesList
+      // });
     }
   }
 
@@ -81,4 +88,4 @@ class MovieList extends React.Component {
   }
 }
 
-ReactDOM.render(<MovieList movies={movies} />, document.getElementById("app"));
+ReactDOM.render(<MovieList />, document.getElementById("app"));
