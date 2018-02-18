@@ -32,7 +32,10 @@ class MovieList extends React.Component {
     axios
       .get("/movies")
       .then(res => {
-        console.log("get in component");
+        console.log(res.data)
+        this.setState({
+          movies: res.data
+        })
       })
       .catch(err => {
         console.log(err);
