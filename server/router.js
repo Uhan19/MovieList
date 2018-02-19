@@ -5,18 +5,17 @@ var movieapi = require("./../lib/movieAPI.js");
 var rp = require("request-promise");
 var Movie = require('./../database/index.js');
 
-router.get("/movies", function(req, res) {
-  res.send(movies);
-});
-
 //https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
 
-router.get("/load", function(req, res) {
+router.post("/movie", function(req, res) {
+  res.send('hello')
+  var formatted = req.body.title.split(' ').join('+'); 
+  console.log(formatted)
   options = {
-    url: `https://api.themoviedb.org/3/search/movie?api_key=${movieapi.TOKEN}&query=Jack+Reacher`,
-    headers: {
-      "user-agent": "Request"
-    }
+    url: `https://api.themoviedb.org/3/search/movie?api_key=${movieapi.TOKEN}&query=${formatted}`
+    // headers: {
+    //   "user-agent": "Request"
+    // }
   };
   rp(options)
     .then(results => {
@@ -34,21 +33,20 @@ router.get("/load", function(req, res) {
         } else {
           console.log('saved!')
         }
-        
       })
     })
     .catch(err => {
       console.log(err);
     });
+    res.send('saved')
 });
 
-router.get('/movies', function(req, res) {
-  res.send(movies)
+router.get('/load', function(req, res) {
+  Movie.Movie.find({}).then((results => {
+    // console.log(results)
+    res.send(results)
+  }))
 })
 
-router.post("/movie", function(req, res) {
-  movies.push(req.body);
-  res.send("post from server");
-});
 
 module.exports = router;

@@ -31,7 +31,7 @@ export class Movie extends React.Component {
     render() {
         return (
           <div>
-            <li onClick={this.handleDescription}>{this.props.movie.title}, {this.state.showDescription? <b>{this.props.movie.description}</b> : null}</li>
+            <li onClick={this.handleDescription}>{this.props.movie.title}, {this.state.showDescription ? <a><b>{this.props.movie.vote_average}</b>, {this.props.movie.overview}</a> : null}</li>
             <input type="checkbox" value='watch' onClick={this.handleWatch}/><i>Watched</i>
          </div>
         )

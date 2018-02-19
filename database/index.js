@@ -1,15 +1,20 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/movielistapp');
+var uniqueValidator = require('mongoose-unique-validator');
 
 
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const movieSchema = {
+let movieSchema = {
     title: String, 
     vote_average: Number, 
-    overview: String
-}
-const Movie = mongoose.model('Movie', movieSchema);
+    overview: String,
+    id: {type: Number, required: true, unique: true}
+};
+
+// movieSchema.plugin(uniqueValidator)
+
+var Movie = mongoose.model('Movie', movieSchema);
 
 
 module.exports.Movie = Movie

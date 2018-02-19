@@ -9,7 +9,7 @@
 - [x] Bonus: Handle the case of no movie by that name found gracefully.
 - [x] Add an input field for users to add movies.
 - [x] Add a button to each list item that allows the user to toggle a 'watched' property.
-- [ ] Add two buttons to allow the users to toggle between a list of 'watched' movies and movies 'to watch'.
+- [x] Add two buttons to allow the users to toggle between a list of 'watched' movies and movies 'to watch'.
 - [x] Add a panel of movie information that appears when the title is clicked (consider starting with hardcoded information)
 
 You can use the following data: 
@@ -41,22 +41,22 @@ var movies = [
 
 ## Level 3 - API
 - [x] Go to https://www.themoviedb.org/documentation/api to learn more about the API you will be using. Sign-up for a new API Key. If you do not receive one within 15 minutes ask a proctor for assistance.
-- [ ] Write code in movieAPI.js necessary to call the API (you may use the 'now_playing' endpoint) and retrieve movie results
-- [ ] Create a new Express GET route called /load in which you make a call to the API. Put the retrieved data into the hardcoded movies array in Express index.js
-- [ ] Modify your index.jsx file accordingly to handle the loaded API data. You should not longer have dummy data anywhere.
+- [x] Write code in movieAPI.js necessary to call the API (you may use the 'now_playing' endpoint) and retrieve movie results
+- [x] Create a new Express GET route called /load in which you make a call to the API. Put the retrieved data into the hardcoded movies array in Express index.js
+- [x] Modify your index.jsx file accordingly to handle the loaded API data. You should not longer have dummy data anywhere.
 
 
 ## Level 4 - Database
-- [ ] Write code in schema.sql to setup your database structure to be able to store your API movie data
-- [ ] Write code in database/index.js to insert and retrieve data from your database
-- [ ] You will be inserting and retrieving the data retrieved from the API. You may pick and chose which specific fields your store
-- [ ] A test file has been provided for you in database/tests/ which you may run indepdently of your application to test your queries.
+- [x] Write code in schema.sql to setup your database structure to be able to store your API movie data
+- [x] Write code in database/index.js to insert and retrieve data from your database
+- [x] You will be inserting and retrieving the data retrieved from the API. You may pick and chose which specific fields your store
+- [x] A test file has been provided for you in database/tests/ which you may run indepdently of your application to test your queries.
 
 
 ## Level 5 - Integration
-- [ ] Modify the 3 Express routes so that they are no longer using or accessing any hardcoded data. 
-- [ ] The /load route should be retrieving from the API and inserting into the DB
-- [ ] The get /movies route should be retrieving from the db
-- [ ] The post /movie route should be inserting into the db
-- [ ] Modify your front end code to only use these routes for both getting and sending data
-- [ ] All other front end functionality (i.e. search, add movie, toggle watched) should still be fully functioning
+- [x] Modify the 3 Express routes so that they are no longer using or accessing any hardcoded data. 
+- [x] The /load route should be retrieving from the API and inserting into the DB
+- [x] The get /movies route should be retrieving from the db
+- [x] The post /movie route should be inserting into the db
+- [x] Modify your front end code to only use these routes for both getting and sending data
+- [x] All other front end functionality (i.e. search, add movie, toggle watched) should still be fully functioning
